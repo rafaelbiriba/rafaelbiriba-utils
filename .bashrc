@@ -3,7 +3,10 @@ PATH=$PATH:$HOME/.rvm/bin:/usr/local/sbin # Add RVM to PATH for scripting
 [ -s ${HOME}/.rvm/scripts/rvm ] && source ${HOME}/.rvm/scripts/rvm
 # change the title of the OS X terminal window
 # See http://hints.macworld.com/article.php?story=20031015173932306
-export PROMPT_COMMAND='echo -ne "\033]0;$@\007"'
+#export PROMPT_COMMAND='echo -ne "\033]0;$@\007"'
+#export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
+#export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}/\007"'
  
 # Color constants
 NO_COLOR='\e[0m' #disable colors
