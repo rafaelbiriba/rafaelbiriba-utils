@@ -7,7 +7,7 @@ PATH=$PATH:$HOME/.rvm/bin:/usr/local/sbin # Add RVM to PATH for scripting
 #export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
 #export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}/\007"'
- 
+
 # Color constants
 NO_COLOR='\e[0m' #disable colors
 TXTBLK='\e[0;30m' # Black - Regular
@@ -43,11 +43,11 @@ BAKPUR='\e[45m'   # Purple
 BAKCYN='\e[46m'   # Cyan
 BAKWHT='\e[47m'   # White
 TXTRST='\e[0m'    # Text Reset
- 
+
 BRIGHT_RED="\[\033[1;31m\]"
 DULL_WHITE="\[\033[0;37m\]"
 BRIGHT_WHITE="\[\033[1;37m\]"
- 
+
 function parse_git_branch {
 ref=$(git symbolic-ref HEAD 2> /dev/null) || return
 echo "("${ref#refs/heads/}")"
@@ -69,7 +69,10 @@ alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gitrollback='git reset --hard; git clean -f'
 alias gunadd='git reset HEAD'
- 
+
+# Developer alias
+alias startmongo='mongod --config /usr/local/etc/mongod.conf &'
+
 # Command prompt config
 PS1="\[$BLDWHT\](\D{%F %T}) \[$UNDYLW\]\u@\H\[$TXTWHT\]\n\[$TXTRED\]#\# \[$TXTWHT\]\w ${BAKRED}\$(parse_git_branch)${TXTWHT}>>\[$NO_COLOR\] "
 # PS1="${DULL_WHITE}\w${BRIGHT_RED} \$(parse_git_branch)${BRIGHT_WHITE}\$ "
