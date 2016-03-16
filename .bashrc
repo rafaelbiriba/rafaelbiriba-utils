@@ -72,6 +72,7 @@ alias gunadd='git reset HEAD'
 
 # Developer alias
 alias startmongo='mongod --config /usr/local/etc/mongod.conf &'
+alias startredis='redis-server /usr/local/etc/redis.conf &'
 
 # Command prompt config
 PS1="\[$BLDWHT\](\D{%F %T}) \[$UNDYLW\]\u@\H\[$TXTWHT\]\n\[$TXTRED\]#\# \[$TXTWHT\]\w ${BAKRED}\$(parse_git_branch)${TXTWHT}>>\[$NO_COLOR\] "
