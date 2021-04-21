@@ -2,13 +2,7 @@
 #
 #  Define the starting search point:
 #
-start="."
-
-#
-#  Loop over directories looking for VOB files
-#
-while read file
-do
+while IFS= read -r -d $'\0' file ; do {
   DIR=$(dirname "$file")
   if [ ! -d "$DIR/converted" ]
      then
@@ -17,6 +11,7 @@ do
   ORIGINAL=`basename "$file" .mp4`
   NEWNAME=${ORIGINAL}.mp4
 
- ffmpeg -y -i "$file" -r 30000/1001 -threads 4 -b:v 4500K -bt 5000K -vcodec libx264 -filter:v yadif -pass 1 -preset fast -an "$DIR/converted/$NEWNAME" </dev/null
- ffmpeg -y -i "$file" -r 30000/1001 -threads 4 -b:v 4500K -bt 5000K -vcodec libx264 -filter:v yadif -pass 2 -preset fast -acodec libfaac -ac 2 -ar 48000 -ab 192k "$DIR/converted/$NEWNAME"  </dev/null
-done < <(find $start \( -iname \*.mp4 \))
+  ffmpeg -y -i "$file" -b:v 3000k -vf scale=-1:1080 -c:v libx264 -pass 1 -preset fast -an "$DIR/converted/$NEWNAME" </dev/null
+  ffmpeg -y -i "$file" -b:v 3000k -vf scale=-1:1080 -c:v libx264 -pass 2 -preset fast -c:a aac -b:a 128k "$DIR/converted/$NEWNAME" </dev/null
+};
+done < <(find "./" -not -type d -maxdepth 1 -iname "*.mp4" -print0)
